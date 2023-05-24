@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+<title>用户中心授权</title>
+<style>
+html {
+	width: 100%;
+	height: 100%;
+}
+
+.full-height {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	overflow-y: hidden;
+	background-color: #ECF1F6;
+	font-family: Arial, Verdana, Sans-serif;
+}
+
+.marginBottom50 {
+	margin-bottom: 50px;
+}
+
+.marginBottom20 {
+	margin-bottom: 20px;
+}
+
+.marginBottom10 {
+	margin-bottom: 10px;
+}
+
+.remember {
+	padding-left: 13px;
+	color: grey;
+}
+
+.button {
+	border-radius: 5px;
+	border: none;
+	height: 30px;
+	width: 100px;
+	cursor: pointer;
+}
+
+.agree {
+	background-color: #49A3FF;
+	color: #FFFFFF;
+}
+
+.reject {
+	background-color: #F8F8F8;
+	border: 1px solid #6F6F6F;
+	color: #555555;
+}
+
+.msg {
+	font-size: 20px;
+	color: #6F6F6F;
+}
+
+.warn {
+	font-size: 14px;
+	color: #FFC168;
+}
+
+.title {
+	font-size: 22px;
+	font-weight: 500;
+	color: #30486D;
+}
+
+.center {
+	background-color: #FFFFFF;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 800px;
+	height: 400px;
+	margin-left: -400px;
+	margin-top: -180px;
+}
+
+.main {
+	padding: 40px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.navbarTop {
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	background: #444B52;
+	color: #FFFFFF;
+	padding: 0 30px;
+	font-size: 20px;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
+
+.icon-title {
+	position: relative;
+	top: 8px;
+	margin-right: 5px;
+	width: 26px;
+	height: 32px;
+	display: inline-block;
+}
+
+.icon-app {
+	width: 100px;
+	height: 100px;
+}
+
+.icon-user {
+	position: relative;
+	top: 12px;
+	margin-right: 5px;
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	border-radius: 20px;
+}
+
+@media only screen and (orientation: portrait) {
+	.center {
+		width: 400px;
+		height: 420px;
+		margin-left: -200px;
+		margin-top: -200px;
+	}
+	.main {
+		padding: 10px;
+	}
+	.button {
+		height: 40px;
+		width: 300px;
+		font-size: 25px;
+		margin-bottom: 10px;
+	}
+	.navbarTop {
+		text-align: center;
+	}
+}
+</style>
+</head>
+<body class="full-height">
+	<header class="navbarTop">
+		<span> <img class="icon-title" src="./img/favicon.png" /> <span
+			data-th-utext="${uc_name}"> ${ESDP用户中心} </span>
+		</span>
+	</header>
+	<div class="center">
+		<div class="main">
+			<div class="text-center" data-th-switch="${client_type}">
+				<img data-th-case="${client_type_cli}" class="icon-app" data-th-src="${client_icon}?: _" src="./img/cli_app.png" />
+				<img data-th-case="${client_type_native}" class="icon-app" data-th-src="${client_icon}?: _" src="./img/native_app.png" />
+				<img data-th-case="${client_type_web}" class="icon-app" data-th-src="${client_icon}?: _" src="./img/web_app.png" />
+				<img data-th-case="${client_type_spa}" class="icon-app" data-th-src="${client_icon}?: _" src="./img/single_page_app.png" />
+			</div>
+			<div class="text-center">
+				<span class="title marginBottom20" data-th-utext="${client_name}">${某应用}</span>
+			</div>
+			<div class="marginBottom50 text-center">
+				<span class="msg">将获取您的用户信息，是否授权?</span>
+			</div>
+			<div class="marginBottom10 text-center">
+				<span class="warn" data-th-utext="|*如果拒绝授权，您将无法使用${client_name}|">*如果拒绝授权，您将无法使用xxx</span>
+			</div>
+			<div class="marginBottom20 text-center">
+				<span> <img class="icon-user" data-th-src="${avatar}?: _"
+					src="./img/default_avatar.png" /> <span class="msg"
+					data-th-utext="${username}"> ${韩梅梅} </span>
+				</span>
+			</div>
+			<div class="text-center">
+				<span>
+					<form class="text-center" data-th-action="@{/authorize}"
+						method='post' style="display: inline-block;">
+						<div class="remember"><label><input name='remember_approval' value='true' type='checkbox' checked>下次不再提示</label></div>
+						<button id="approve" type="submit" class="button agree">同意</button>
+						<input name='user_oauth_approval' value='true' type='hidden'>
+
+						<input name='client_id' data-th-value="${client_id}" type='hidden'>
+						<!-- 
+                                <input type="hidden" data-th-name="${_csrf.parameterName}"
+                                    data-th-value="${_csrf.token}" />
+                                     -->
+					</form>
+					<form data-th-action="@{/authorize}" method='post'
+						class="text-center" style="display: inline-block;">
+						<input name='user_oauth_approval' value='false' type='hidden'>
+						<input name='client_id' data-th-value="${client_id}" type='hidden'>
+						<button id="deny" type="submit" class="button reject">拒绝</button>
+					</form>
+				</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

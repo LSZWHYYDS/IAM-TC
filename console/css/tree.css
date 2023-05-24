@@ -1,0 +1,87 @@
+ul.tree {
+  overflow-x: auto;
+  white-space: nowrap;
+  display: -webkit-flex; /* Safari */
+  -webkit-justify-content: space-around; /* Safari 6.1+ */
+  display: flex;
+  justify-content: space-around;
+}
+ul.tree,
+ul.tree ul {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+ul.tree li {
+  display: block;
+  width: auto;
+  float: left;
+  padding: 0;
+  margin: 0;
+}
+ul.tree ul li {
+  background-image: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=);
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+ul.tree li span {
+  display: block;
+  width: 10em;
+  /*
+    uncomment to fix levels
+    height: 1.5em;
+  */
+  margin: 0 auto;
+  text-align: center;
+  white-space: normal;
+  letter-spacing: normal;
+}
+
+ul.tree ul li:last-child {
+  background-repeat: no-repeat;
+  background-size:50% 1px;
+  background-position: left top;
+}
+ul.tree ul li:first-child {
+  background-repeat: no-repeat;
+  background-size: 50% 1px;
+  background-position: right top;
+}
+ul.tree ul li:first-child:last-child {
+  background: none;
+}
+ul.tree ul li span {
+  background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+  background-size: 1px 0.8em;
+  padding-top: 0.8em;
+}
+ul.tree ul {
+  background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+  background-size: 1px 0.8em;
+  margin-top: 0.2ex;
+  padding-top: 0.8em;
+}
+.grayButton{
+  background-color:#f1f1f1;
+  border:1px solid #999;
+  border-radius:4px;
+  padding:4px;
+  margin:4px;
+  text-align:center;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.blueButton{
+  background-color:#5B74A8;
+  border:1px solid #999;
+  border-radius:4px;
+  padding:4px;
+  margin:4px;
+  text-align:center;
+  font-weight:bold;
+  color:#fff;
+  cursor: pointer;
+  display: inline-block;
+}
